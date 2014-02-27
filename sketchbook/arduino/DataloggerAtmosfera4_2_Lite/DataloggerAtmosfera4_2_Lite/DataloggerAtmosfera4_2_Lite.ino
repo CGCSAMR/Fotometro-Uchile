@@ -187,6 +187,7 @@ void loop()
   
   data = doubleToString(bmp.readAltitude(SEA_LEVEL_PRESSURE));
   dataFile.println(data);
+  data = "";
   
     
   dataFile.close();
