@@ -13,19 +13,25 @@ LiquidCrystal lcd(9, 10, 6, 4, 3, 2);
 void setup() {
     lcd.begin(16, 2);
   // Print a message to the LCD.
-  lcd.print("m1");
-  lcd.setCursor(7, 0);
-  lcd.print("m2");
+  lcd.print("Yellow");
+  lcd.setCursor(8, 0);
+  lcd.print("Blue");
 }
 
 // the loop routine runs over and over again forever:
 void loop() {
 
-   lcd.setCursor(0, 1);
-  lcd.print(analogRead(A0));
-  lcd.print("mV")
-  lcd.setCursor(7, 1);
-  lcd.print(analogRead(A1));
-  lcd.print("mV")
-  delay(1); 
+  lcd.setCursor(0, 1);
+  lcd.print("    ");
+  lcd.setCursor(0, 1);
+  lcd.print(analogRead(A1)*5.0/1024);
+  lcd.setCursor(6, 1);
+  lcd.print("V");
+  lcd.setCursor(8, 1);
+  lcd.print("    ");
+  lcd.setCursor(8, 1);
+  lcd.print(analogRead(A0)*5.0/1024);
+  lcd.setCursor(14, 1);
+  lcd.print("V");
+  delay(100); 
 }  // delay in between reads for stability
