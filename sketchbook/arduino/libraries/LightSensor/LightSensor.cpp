@@ -1,9 +1,3 @@
- 
-/*
-  Morse.cpp - Library for flashing Morse code.
-  Created by David A. Mellis, November 2, 2007.
-  Released into the public domain.
-*/
 
 #include "Arduino.h"
 #include "LightSensor.h"
@@ -25,7 +19,7 @@ int LightSensor::instantMeasure()
   return analogRead(_pin);
 }
 
-double[] LightSensor::measure()
+double* LightSensor::measure()
 {
   int buffer[_dataPoints]; // Store "_dataPoints" max values of individual measures
   double results[2]; // Used to return mean and variance of measure
@@ -43,19 +37,19 @@ double[] LightSensor::measure()
 	
       }
       
-      aux[0] = mean(buffer, _dataPoints); //takes a mean of the sensor's info
+      aux[0] = mean(buffer); //takes a mean of the sensor's info
       
      if( results[0] < aux[0] )//search the higher mean of all the groups of meditions and calculates the variance of the group
      {
        results[0] = aux[0];
-       results[1] = variance(buffer1, promedio1, LARGO_MEDIDA);
+       results[1] = variance(buffer, aux[0]);
        }
     }
     
     return results;
 }
 
-double LightSensor::_mean(int[] data)
+double LightSensor::mean(int* data)
 {
   int dataLength = sizeof(data)/sizeof(data[0]);
   double sum = 0;
@@ -69,17 +63,17 @@ double LightSensor::_mean(int[] data)
   
 }
 
-double LightSensor::_variance(int[] data)
+double LightSensor::variance(int* data)
 {
   int dataLength = sizeof(data)/sizeof(data[0]);
   
-  double mean = mean(data);
+  double meanAux = mean(data);
   
   double aux = 0;
   double sum = 0;
   
   for(int i = 0; i < dataLength; i++){
-    aux = (data[i] - mean);
+    aux = (data[i] - meanAux);
     aux = aux*aux;
     sum += aux;
   }
@@ -88,7 +82,7 @@ double LightSensor::_variance(int[] data)
   
 }
 
-double LightSensor::_variance(int[] data, double mean)
+double LightSensor::variance(int* data, double mean)
 {
   int dataLength = sizeof(data)/sizeof(data[0]);
   
