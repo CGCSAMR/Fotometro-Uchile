@@ -1,0 +1,101 @@
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 07/01/2014 19:28:26
+
+BeginCmp
+TimeStamp = /52CC7B60;
+Reference = 0.1uF1;
+ValeurCmp = C1;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC7B6D;
+Reference = 0.1uF2;
+ValeurCmp = C2;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC7B8E;
+Reference = 10uF1;
+ValeurCmp = CP2;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC7B81;
+Reference = 10uF2;
+ValeurCmp = CP1;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC7B79;
+Reference = C5;
+ValeurCmp = 0.1uF;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC7B73;
+Reference = C6;
+ValeurCmp = 0.1uF;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC7B96;
+Reference = D1;
+ValeurCmp = LED A31;
+IdModule  = LED-5MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC7BA3;
+Reference = D2;
+ValeurCmp = LED B31;
+IdModule  = LED-5MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC818D;
+Reference = P1;
+ValeurCmp = CONN_4;
+IdModule  = PIN_ARRAY_4x1;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC7CE5;
+Reference = R1;
+ValeurCmp = R;
+IdModule  = R3-LARGE_PADS;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC7C6E;
+Reference = R2;
+ValeurCmp = R;
+IdModule  = R3-LARGE_PADS;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC863A;
+Reference = R3;
+ValeurCmp = R;
+IdModule  = R3-LARGE_PADS;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC8665;
+Reference = R4;
+ValeurCmp = R;
+IdModule  = R3-LARGE_PADS;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC7B30;
+Reference = U1;
+ValeurCmp = TLC272CP;
+IdModule  = DIP-8__300_ELL;
+EndCmp
+
+EndListe

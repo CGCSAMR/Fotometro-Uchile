@@ -1,0 +1,59 @@
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 07/01/2014 10:17:10
+
+BeginCmp
+TimeStamp = /52CC09B4;
+Reference = C1;
+ValeurCmp = .01uF;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC09C3;
+Reference = C2;
+ValeurCmp = 10uF;
+IdModule  = C1V8;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC098D;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LEDV;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC0972;
+Reference = R1;
+ValeurCmp = 4.7k;
+IdModule  = R4;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC0985;
+Reference = R2;
+ValeurCmp = 1k;
+IdModule  = R4;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC097F;
+Reference = R3;
+ValeurCmp = 330;
+IdModule  = R4;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC09A3;
+Reference = RV1;
+ValeurCmp = 100kpot;
+IdModule  = POT_CMS;
+EndCmp
+
+BeginCmp
+TimeStamp = /52CC095D;
+Reference = U1;
+ValeurCmp = LM555N;
+IdModule  = 20TEX300;
+EndCmp
+
+EndListe
