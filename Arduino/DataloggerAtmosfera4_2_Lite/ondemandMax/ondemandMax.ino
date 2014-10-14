@@ -26,8 +26,8 @@ void setup() {
 // the loop routine runs over and over again forever:
 void loop() {
   
-  amarillo = analogRead(A1);
-  azul = analogRead(A0);
+  amarillo = analogRead(A0);
+  azul = analogRead(A1);
   
   if(maxAmarillo < amarillo)
   {
