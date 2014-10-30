@@ -1,0 +1,7 @@
+Led A3
+Resistencias: 1.5 MOhm
+Condensador: -
+
+Led B3
+Resistencias: 10 MOhm
+Condensador: -
