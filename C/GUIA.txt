@@ -1,0 +1,23 @@
+
+-Funciones posición solar
+TRABAJA CON: FECHA, HORA Y COORDENADAS
+
+	-Debe incluir conversor de fecha a formato estándar (depende de algoritmo de cálculo)
+
+	-Indican ángulo zenital del sol para día, hora y ubicación (lat, long)
+		* Se puede hacer función para ángulo azimutal pero no es urgente ni necesario
+
+	-Distancia Tierra-Sol
+
+------------------------------------------------------------------------------------------------
+
+-Funciones espesor óptico
+TRABAJA CON: ANGULO AZIMUTAL, COORDENADAS, PRESION, ALTITUD, TEMPERATURA, LONG ONDA SENSORES, CTE CALIBRACION
+
+	-Cálculo masa de aire o airmass
+
+	-Cálculo espesor óptico de Rayleigh para frecuencia equivalente dada
+	
+	
+
+
