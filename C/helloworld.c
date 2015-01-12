@@ -18,11 +18,3 @@ int main ()
 	
 	return 0;
 }
-
-funcion(i++)
-
-funcion(++i)
-
-i++
-
-++i
