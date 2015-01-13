@@ -7,6 +7,8 @@
  */
 #include <LiquidCrystal.h>
 
+#define PIN_BUZZER 5
+
 // initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(9, 10, 6, 4, 3, 2);
 // the setup routine runs once when you press reset:
@@ -21,6 +23,9 @@ void setup() {
   lcd.print("Yellow");
   lcd.setCursor(8, 0);
   lcd.print("Blue");
+  tone(PIN_BUZZER, 698);
+  delay(300);
+  noTone(PIN_BUZZER);
 }
 
 // the loop routine runs over and over again forever:
@@ -32,11 +37,17 @@ void loop() {
   if(maxAmarillo < amarillo)
   {
       maxAmarillo = amarillo;
+      tone(PIN_BUZZER, 1046);
+      delay(20);
+      noTone(PIN_BUZZER);
   }
   
   if(maxAzul < azul)
   {
       maxAzul = azul;
+      tone(PIN_BUZZER, 1046);
+      delay(20);
+      noTone(PIN_BUZZER);
   }
   
   lcd.setCursor(0, 1);
