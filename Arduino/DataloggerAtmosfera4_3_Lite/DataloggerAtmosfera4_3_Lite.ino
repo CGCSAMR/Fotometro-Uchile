@@ -168,6 +168,28 @@ void loop()
        varianza2 = varianza(buffer2, promedio2, LARGO_MEDIDA);
        }
     }
+  
+  //imprimir max voltaje medido en pantalla
+  lcd.setCursor(2,0)  
+  lcd.print("Yellow");
+  lcd.setCursor(8, 0);
+  lcd.print("Blue");
+  tone(PIN_BUZZER, 698);
+  delay(300);
+  noTone(PIN_BUZZER);
+    
+  lcd.setCursor(0, 1);
+  lcd.print("    ");
+  lcd.setCursor(0, 1);
+  lcd.print(promedio2);
+  lcd.setCursor(6, 1);
+  lcd.print("V");
+  lcd.setCursor(8, 1);
+  lcd.print("    ");
+  lcd.setCursor(8, 1);
+  lcd.print(promedio1);
+  lcd.setCursor(14, 1);
+  lcd.print("V");
     
   //writes the file with the information  
   data =  doubleToString(promedio1) + "," + doubleToString(promedio2) + ",";
