@@ -45,8 +45,8 @@ LiquidCrystal lcd(9, 10, 6, 4, 3, 2);
 // functions will not work.
 const int chipSelect = 4;//Constanst to use
 const int buttonPin = A2; 
-#define TIEMPO_MEDICION 10000//Time of a medition in millis
-#define LARGO_MEDIDA 3//Number of meditions to take 
+#define TIEMPO_MEDICION 20000//Time of a medition in millis
+#define LARGO_MEDIDA 3//Number of measurements to take 
 #define SEA_LEVEL_PRESSURE 101500//Sea level prssure
 #define PIN_BUZZER 5//conetion to the pin buzzer
 
@@ -169,28 +169,6 @@ void loop()
        }
     }
   
-  //imprimir max voltaje medido en pantalla
-  lcd.setCursor(2,0)  
-  lcd.print("Yellow");
-  lcd.setCursor(8, 0);
-  lcd.print("Blue");
-  tone(PIN_BUZZER, 698);
-  delay(300);
-  noTone(PIN_BUZZER);
-    
-  lcd.setCursor(0, 1);
-  lcd.print("    ");
-  lcd.setCursor(0, 1);
-  lcd.print(promedio2);
-  lcd.setCursor(6, 1);
-  lcd.print("V");
-  lcd.setCursor(8, 1);
-  lcd.print("    ");
-  lcd.setCursor(8, 1);
-  lcd.print(promedio1);
-  lcd.setCursor(14, 1);
-  lcd.print("V");
-    
   //writes the file with the information  
   data =  doubleToString(promedio1) + "," + doubleToString(promedio2) + ",";
   dataFile.print(data);  
@@ -215,6 +193,29 @@ void loop()
   dataFile.close();
   
   finBuzzer();//final sound
+  
+  //imprimir max voltaje medido en pantalla
+  lcd.clear();
+  lcd.home();  
+  lcd.print("Yellow");
+  lcd.setCursor(8, 0);
+  lcd.print("Blue");
+      
+  lcd.setCursor(0, 1);
+  lcd.print("    ");
+  lcd.setCursor(0, 1);
+  lcd.print(promedio1);
+  lcd.setCursor(6, 1);
+  lcd.setCursor(8, 1);
+  lcd.print("    ");
+  lcd.setCursor(8, 1);
+  lcd.print(promedio2);
+  lcd.setCursor(14, 1);
+  
+  while( !digitalRead(buttonPin) )
+  {}
+   
+   delay(1000);   
     
   }  
 
