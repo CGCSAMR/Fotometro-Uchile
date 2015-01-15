@@ -215,7 +215,7 @@ void loop()
   while( !digitalRead(buttonPin) )
   {}
    
-   delay(1000);   
+   delay(500);   
     
   }  
 
