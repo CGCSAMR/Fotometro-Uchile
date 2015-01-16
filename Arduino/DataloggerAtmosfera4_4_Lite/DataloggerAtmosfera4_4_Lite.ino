@@ -153,17 +153,16 @@ void loop()
     for (int medidaIndividual = 0; medidaIndividual < LARGO_MEDIDA; medidaIndividual++){
 
       // read the sensors and saves one information individualy in every buffer
-      buffer1[medidaIndividual] = analogRead(A0);
-      buffer2[medidaIndividual] = analogRead(A1);
+      promedioBuff1 = analogRead(A0);
+      promedioBuff2 = analogRead(A1);
     }
       
-      promedioBuff1 = promedio(buffer1, LARGO_MEDIDA);//takes a mean of the information of the sensor
-      promedioBuff2 = promedio(buffer2, LARGO_MEDIDA);
-      
-     if( promedio1 < promedioBuff1)//search the high mean of all the groups of meditions and calcules the variance of the group
+       
+   if( promedio1 < promedioBuff1)//search the high mean of all the groups of meditions and calcules the variance of the group
      {
        promedio1 = promedioBuff1;
        }
+       
     if( promedio2 < promedioBuff2)
      {
        promedio2 = promedioBuff2;
@@ -231,12 +230,7 @@ void loop()
     lcd.setCursor(14, 1);
     lcd.print("ok");
     
-}
-}
-
-double promedio(int datos[], int largo){
-//it calcules the mean of a group of numbers
-  return datos[0];
+  }
 }
 
 
