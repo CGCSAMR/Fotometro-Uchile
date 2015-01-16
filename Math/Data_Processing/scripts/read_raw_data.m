@@ -1,6 +1,6 @@
 function [] = read_raw_data(filename)
 
-name = ['../raw_data/' filename '.CSV'];
+name = ['../raw_data/' filename '.csv'];
 
 fid = fopen(name);
 
@@ -42,10 +42,11 @@ for i=1:size(head')
      raw_data.(head{i})=data{:,i};
 end
 
-mkdir(['../output/' filename])
+raw_data.udate = datenum(raw_data.Year, raw_data.Month, raw_data.Day, ...
+            raw_data.Hour, raw_data.Minute, raw_data.Second);
 
-save(['../output/' filename '/raw_' filename '.mat'],'raw_data','-v7');
+save(['../output/' filename '/others/raw_' filename '.mat'],'raw_data','-v7');
 
- 
+end
 
 

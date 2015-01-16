@@ -121,7 +121,7 @@ void loop()
     lcd.clear();
     lcd.home();
     lcd.print("Midiendo...");
-    File dataFile = SD.open("DATALOG.CSV", FILE_WRITE);
+    File dataFile = SD.open("DATALOG.csv", FILE_WRITE);
   if (dataFile) {
   //write the date
   
