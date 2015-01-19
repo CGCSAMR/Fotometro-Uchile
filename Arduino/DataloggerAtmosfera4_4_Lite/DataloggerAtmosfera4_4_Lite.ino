@@ -138,15 +138,12 @@ void loop()
   
   data = "";
 //reset of all the variables of a medition
-  double promedio1 = 0.0;
-  double promedioBuff1 = 0.0;
+  int promedio1 = 0;
+  int promedioBuff1 = 0;
+    
+  int promedio2 = 0;
+  int promedioBuff2 = 0;
   
-  double promedio2 = 0.0;
-  double promedioBuff2 = 0.0;
-  
-  double varianza1 = 0.0;
-  double varianza2 = 0.0;
-
   long inicio = millis();//time of the begin
   
   // Llena arreglo con promedios y varianzas de cada muestra
@@ -173,7 +170,7 @@ void loop()
     }
   
   //writes the file with the information  
-  data =  doubleToString(promedio1) + "," + doubleToString(promedio2) + ",";
+  data =  String(promedio1) + "," + String(promedio2) + ",";
   dataFile.print(data);  
   
   data = "";
