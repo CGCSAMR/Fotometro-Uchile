@@ -1,6 +1,6 @@
-function [] = read_raw_data(filename)
+function [] = read_raw_data(filename,path)
 
-name = ['../raw_data/' filename '.csv'];
+name = [ path '/raw_data/' filename '.csv'];
 
 fid = fopen(name);
 
@@ -45,7 +45,7 @@ end
 raw_data.udate = datenum(raw_data.Year, raw_data.Month, raw_data.Day, ...
             raw_data.Hour, raw_data.Minute, raw_data.Second);
 
-save(['../output/' filename '/others/raw_' filename '.mat'],'raw_data','-v7');
+save([ path '/output/' filename '/others/raw_' filename '.mat'],'raw_data','-v7');
 
 end
 

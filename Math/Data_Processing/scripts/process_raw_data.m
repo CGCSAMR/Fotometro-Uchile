@@ -1,6 +1,7 @@
-function [] = process_raw_data(filename, lat, long)
+function [] = process_raw_data(filename, lat, long, path)
  
-cd ..
-cd( [ 'output/' filename '/others/' ] )
+cd( [ path '/output/' filename ] )
+
+
 
 end

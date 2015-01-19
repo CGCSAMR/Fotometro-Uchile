@@ -1,0 +1,9 @@
+function [] = process_raw_data(filename, lat, long)
+ 
+cd( [ '../output/' filename ] )
+cd others
+
+
+2+2
+
+end
