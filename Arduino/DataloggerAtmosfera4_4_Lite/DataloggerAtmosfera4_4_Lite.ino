@@ -2,6 +2,9 @@
 // SE ELIMINA CALCULO DE VARIANZA
 // SE MIDE SOLO EL MAXIMO
 
+// LED AMARILLO A0 (promedio1) ~570nm
+// LED AZUL A1 (promedio2) ~400nm
+
 // VERSION CON INTERFAZ
 
 /*
@@ -91,7 +94,7 @@ void setup()
   if(!SD.exists("datalog.csv"))//Verifies if exists the file where the information is saves, if don't exists,il'll create a new file and write a head line
   {
     File dataFile = SD.open("DATALOG.CSV", FILE_WRITE);
-    dataFile.println("Year,Month,Day,Hour,Minute,Second,Sens1,Sens2,Temperature_C,Pressure_Pa,Altitude_m");
+    dataFile.println("Year,Month,Day,Hour,Minute,Second,Sens_570nm,Sens_400nm,Temperature_C,Pressure_Pa,Altitude_m");
     dataFile.close();
   }
   if (!bmp.begin()) {//Check if the BMP 085 (BMP 180) is presentnt, if it isn't, it'll show an error.
