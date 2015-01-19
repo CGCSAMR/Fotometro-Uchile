@@ -27,15 +27,15 @@ newudate = raw_data.udate(index);
 %% CONSTANTES Y STRINGS UTILES
 
 P0=1013.25; % PRESION n.d.m.
-lamtxt={'400','500'};
+lamtxt={'570nm','400nm'};
 
-lam=[400,500]; % LONGITUD DE ONDA DE MEDICION
+lam=[570,400]; % LONGITUD DE ONDA DE MEDICION EN nm
 
-aodtxt={'AOT_400','AOT_500'};
-sigtxt={'Sens1','Sens2'};
+aodtxt={'AOT_570nm','AOT_400nm'};
+sigtxt={'Sens_570nm','Sens_400nm'};
 
 % CONSTANTES DE CALIBRACION
-V0 = [1000 800];
+V0 = [1000 1300];
 
 %% CALCULO DEL DIA DEL AÑO (NO DIA JULIANO, NO SE LLAMA ASI)
 
@@ -140,33 +140,28 @@ end
     calan_data.SunDistCORR     =  SDCORR'         ;  
   
     % Arreglar NOMBRES de Sensores en programa arduino
-    calan_data.SIG380     =  raw_data.Sens1(index)         ;  
-    calan_data.SIG440     =  raw_data.Sens2(index)         ;  
+    calan_data.Sens_570nm     =  raw_data.Sens_570nm(index)         ;  
+    calan_data.Sens_400nm     =  raw_data.Sens_400nm(index)         ;  
     
 
-    cimelcorregido.AOT380     =  AOT{1}         ;  
-    cimelcorregido.AOT440     =  AOT{2}         ;  
-    cimelcorregido.AOT500     =  AOT{3}         ;  
-    cimelcorregido.AOT675     =  AOT{4}         ;  
-    cimelcorregido.AOT870     =  AOT{5}         ;
-    cimelcorregido.AOT936     =  AOT{6}         ;
-    cimelcorregido.AOT1020    =  AOT{7}         ;
-    cimelcorregido.AOT1020i   =  AOT{8}         ;
-    cimelcorregido.AOT1640i   =  AOT{9}         ;
+    calan_data.AOT_570nm     =  AOT{1}         ;  
+    calan_data.AOT_400nm     =  AOT{2}         ;  
+   
     
     
-    cimelcorregido.udate      =  newudate       ;              
-    cimelcorregido.otros.tauR =  tauRbod;
-    cimelcorregido.otros.idcam=index;
-    cimelcorregido.otros.lamtxt=lamtxt;
-    cimelcorregido.otros.lam=lam;
-    cimelcorregido.otros.aodtxt={'AOT_380_SI','AOT_440_SI','AOT_500_SI','AOT_675_SI','AOT_870_SI','AOT_936_SI','AOT_1020_SI','AOT_1020_InGaAs','AOT_1640_InGaAs'};
-    cimelcorregido.otros.sigtxt={'SUN_380_SI','SUN_440_SI','SUN_500_SI','SUN_675_SI','SUN_870_SI','SUN_936_SI','SUN_1020_SI','SUN_1020_InGaAs','SUN_1640_InGaAs'};
-    cimelcorregido.otros.ctes={'LNV01','LNV02','LNV03','LNV04','LNV05'};
-    cimelcorregido.otros.cimeloriginal=cimel;
+    calan_data.udate      =  newudate       ;              
+    calan_data.otros.tauR =  tauRbod;
+    calan_data.otros.idcam=index;
+    calan_data.otros.lamtxt=lamtxt;
+    calan_data.otros.lam=lam;
+    calan_data.otros.aodtxt=aodtxt;
+    calan_data.otros.sigtxt=sigtxt;
+    calan_data.V0=V0;
+    calan_data.otros.raw_data=raw_data;
 
-    c = cimelcorregido;
+    c = calan_data;
     
-save('/home/felipe/Documents/MATLAB/CIMEL/scripts/correctedData/fullDataCimel.mat','c','-v7');
+save( ['AOT_' name '.mat' ] , 'raw_data' , '-v7' );
+
 
 

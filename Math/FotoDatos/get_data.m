@@ -1,7 +1,7 @@
 clear all
 
-path = fileparts(mfilename('fullpath'))
-cd(path)
+path = fileparts(mfilename('fullpath'));
+cd(path);
 
 %% User inputs
 
