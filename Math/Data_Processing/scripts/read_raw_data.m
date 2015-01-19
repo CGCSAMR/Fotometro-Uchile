@@ -45,7 +45,10 @@ end
 raw_data.udate = datenum(raw_data.Year, raw_data.Month, raw_data.Day, ...
             raw_data.Hour, raw_data.Minute, raw_data.Second);
 
-save([ path '/output/' filename '/others/raw_' filename '.mat'],'raw_data','-v7');
+save([ filename '.mat' ],'raw_data','-v7');
+
+
+
 
 end
 
