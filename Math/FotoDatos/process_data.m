@@ -35,7 +35,7 @@ aodtxt={'AOT_556_nm','AOT_414_nm'};
 sigtxt={'Sens_556_nm','Sens_414_nm'};
 
 % CONSTANTES DE CALIBRACION
-V0 = [1000 1300];
+V0 = [1000 1356.3];
 
 %% CALCULO DEL DIA DEL AÑO (NO DIA JULIANO, NO SE LLAMA ASI)
 
@@ -140,14 +140,14 @@ end
     calan_data.SunDistCORR     =  SDCORR'         ;  
   
     % Arreglar NOMBRES de Sensores en programa arduino
-    calan_data.Sens_556nm     =  raw_data.Sens_556_nm(index)         ;  
-    calan_data.Sens_414nm     =  raw_data.Sens_414_nm(index)         ;  
+    calan_data.Sens_556_nm     =  raw_data.Sens_556_nm(index)         ;  
+    calan_data.Sens_414_nm     =  raw_data.Sens_414_nm(index)         ;  
     
 
-    calan_data.AOT_556nm     =  AOT{1}         ;  
-    calan_data.AOT_414nm     =  AOT{2}         ;  
+    calan_data.AOT_556_nm     =  AOT{1}         ;  
+    calan_data.AOT_414_nm     =  AOT{2}         ;  
    
-    
+    calan_data.V0=V0;
     
     calan_data.udate      =  newudate       ;              
     calan_data.otros.tauR =  tauRbod;
@@ -156,7 +156,6 @@ end
     calan_data.otros.lam=lam;
     calan_data.otros.aodtxt=aodtxt;
     calan_data.otros.sigtxt=sigtxt;
-    calan_data.V0=V0;
     calan_data.otros.raw_data=raw_data;
 
     c = calan_data;
