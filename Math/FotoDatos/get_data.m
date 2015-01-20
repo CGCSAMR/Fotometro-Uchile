@@ -18,7 +18,7 @@ N = 13;
 
 %% Read Header
 
-filename = [ name '.csv'];
+filename = [ name '.CSV'];
 fid = fopen(filename);
 
 lineFormat = '';

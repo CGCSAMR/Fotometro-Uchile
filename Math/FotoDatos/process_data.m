@@ -27,12 +27,12 @@ newudate = raw_data.udate(index);
 %% CONSTANTES Y STRINGS UTILES
 
 P0=1013.25; % PRESION n.d.m.
-lamtxt={'570nm','400nm'};
+lamtxt={'556_nm','414_nm'};
 
 lam=[570,400]; % LONGITUD DE ONDA DE MEDICION EN nm
 
-aodtxt={'AOT_570nm','AOT_400nm'};
-sigtxt={'Sens_570nm','Sens_400nm'};
+aodtxt={'AOT_556_nm','AOT_414_nm'};
+sigtxt={'Sens_556_nm','Sens_414_nm'};
 
 % CONSTANTES DE CALIBRACION
 V0 = [1000 1300];
@@ -161,7 +161,7 @@ end
 
     c = calan_data;
     
-save( ['AOT_' name '.mat' ] , 'raw_data' , '-v7' );
+save( ['AOT_' name '.mat' ] , 'calan_data' , '-v7' );
 
 
 
