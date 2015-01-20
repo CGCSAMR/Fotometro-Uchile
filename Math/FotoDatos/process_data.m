@@ -140,12 +140,12 @@ end
     calan_data.SunDistCORR     =  SDCORR'         ;  
   
     % Arreglar NOMBRES de Sensores en programa arduino
-    calan_data.Sens_570nm     =  raw_data.Sens_570nm(index)         ;  
-    calan_data.Sens_400nm     =  raw_data.Sens_400nm(index)         ;  
+    calan_data.Sens_556nm     =  raw_data.Sens_556_nm(index)         ;  
+    calan_data.Sens_414nm     =  raw_data.Sens_414_nm(index)         ;  
     
 
-    calan_data.AOT_570nm     =  AOT{1}         ;  
-    calan_data.AOT_400nm     =  AOT{2}         ;  
+    calan_data.AOT_556nm     =  AOT{1}         ;  
+    calan_data.AOT_414nm     =  AOT{2}         ;  
    
     
     

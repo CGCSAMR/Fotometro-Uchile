@@ -14,7 +14,7 @@ latitud = -33.2738;
 longitud = -70.3942;
 
 % Numero columnas
-N = 13;
+N = 11;
 
 %% Read Header
 
