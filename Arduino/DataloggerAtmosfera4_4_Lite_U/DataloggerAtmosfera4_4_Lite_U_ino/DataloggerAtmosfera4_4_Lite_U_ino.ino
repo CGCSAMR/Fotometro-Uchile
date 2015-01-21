@@ -85,10 +85,10 @@ void setup()
   }
   pinMode(chipSelect, OUTPUT);//comunication with Olimex-MCI datalogger
   pinMode(buttonPin, INPUT);
-  pinMode(buttonPin0, INPUT);//comunication with the A2 button   
+  pinMode(buttonPin0, INPUT);//comunication with the A2 and 7 button   
   // see if the card is present and can be initialized, if it isn't,it'll show an error in the display :
   if (!SD.begin(chipSelect)) {
-    lcd.clear();
+    lcd.clear();//SD validation
     lcd.home();
     lcd.print("SD card Error");
     errorSD();    
@@ -101,10 +101,10 @@ void setup()
     dataFile.println("Year,Month,Day,Hour,Minute,Second,Sens_556_nm,Sens_414_nm,Temperature_C,Pressure_Pa,Altitude_m");
     dataFile.close();
   }
-  if (!bmp.begin()) {//Check if the BMP 085 (BMP 180) is presentnt, if it isn't, it'll show an error.
+  if (!bmp.begin()) {//Check if the BMP 085 or 180 is presentnt, if it isn't, it'll show an error.
     lcd.clear();
     lcd.home();
-    lcd.print("BMP085 Error");
+    lcd.print("BMP Error");
     while (1) {
     }
   }
