@@ -52,16 +52,18 @@ LiquidCrystal lcd(9, 10, 6, 4, 3, 2);
 const int chipSelect = 8;//Constanst to use
 const int buttonPin = A2;
 const int buttonPin0 = 7;
+const int buttonPin1 = A3;
 #define TIEMPO_MEDICION 20000//Time of a medition in millis
-#define LARGO_MEDIDA 1//Number of measurements to take 
+//#define LARGO_MEDIDA 1//Number of measurements to take 
 #define SEA_LEVEL_PRESSURE 101500//Sea level prssure
 #define PIN_BUZZER 5//conetion to the pin buzzer
 
 // One buffer by channel
-int buffer1[LARGO_MEDIDA];  // Saves the meditions of the aerosols's sensor
-int buffer2[LARGO_MEDIDA];  // #line = number of channels #columns = number of individual meditions
+//int buffer1[LARGO_MEDIDA];  // Saves the meditions of the aerosols's sensor
+//int buffer2[LARGO_MEDIDA];  // #line = number of channels #columns = number of individual meditions
 int buttonState = 0;
 int buttonState0 = 0;// initial state of the A2 button
+int buttonState1 = 0;
 int inicio;// call int inicio
 String data="";//call String data
 File dataFile;
@@ -95,7 +97,7 @@ void setup()
     // don't do anything more:, only sound the buzzer
     //return;
   }
-  // indicate what havve every column
+  // indicate what have every column
   if(!SD.exists("DATALOG.CSV")){//Verifies if exists the file where the information is saves, if don't exists,il'll create a new file and write a head line
     File dataFile = SD.open("DATALOG.CSV", FILE_WRITE);
     dataFile.println("Year,Month,Day,Hour,Minute,Second,Sens_556_nm,Sens_414_nm,Temperature_C,Pressure_Pa,Altitude_m");
@@ -123,6 +125,7 @@ void loop()
 {
   buttonState = digitalRead(buttonPin);
   buttonState0 = digitalRead(buttonPin0);//read the button input
+  buttonState1 = digitalRead(buttonPin1);
   if (buttonState == HIGH){ 
     //if the buttton is pushed,the photometer will begin to measure
     // open the file. note that only one file can be open at a time,
@@ -139,34 +142,27 @@ void loop()
       dataFile.print(data);
       data = "";
       //reset of all the variables of a medition
-      int promedio1 = 0;
-      int promedioBuff1 = 0;
-      int promedio2 = 0;
-      int promedioBuff2 = 0;
+      int sens1 = 0;
+      int sensBuff1 = 0;
+      int sens2 = 0;
+      int sensBuff2 = 0;
 
       long inicio = millis();//time of the begin
 
-      // Llena arreglo con promedios y varianzas de cada muestra
+      // Mide el maximo 
       while((millis() - inicio) < TIEMPO_MEDICION){
-        //writes in bufferSensor all the information individualy
-        for (int medidaIndividual = 0; medidaIndividual < LARGO_MEDIDA; medidaIndividual++){
-          // read the sensors and saves one information individualy in every buffer
-          promedioBuff1 = analogRead(A0);
-          promedioBuff2 = analogRead(A1);
-        }
+        
+        sensBuff1 = analogRead(A0);
+        sensBuff2 = analogRead(A1);
+        
+        sens1 = ( sens1 < sensBuff1 ) ? sensBuff1 : sens1 ;
+        sens2 = ( sens2 < sensBuff2 ) ? sensBuff2 : sens2 ;
 
-
-        if( promedio1 < promedioBuff1){//search the high mean of all the groups of meditions and calcules the variance of the group
-          promedio1 = promedioBuff1;
-        }
-
-        if( promedio2 < promedioBuff2){
-          promedio2 = promedioBuff2;
-        }
+        
       }
 
       //writes the file with the information  
-      data =  String(promedio1) + "," + String(promedio2) + ",";
+      data =  String(sens1) + "," + String(sens2) + ",";
       dataFile.print(data);  
 
       data = "";
@@ -194,10 +190,10 @@ void loop()
       lcd.setCursor(0, 1);
       lcd.print("  ");
       lcd.setCursor(0, 1);
-      lcd.print(promedio1);
+      lcd.print(sens1);
       lcd.print("  ");
       lcd.setCursor(8, 1);
-      lcd.print(promedio2);
+      lcd.print(sens2);
 
       while( !digitalRead(buttonPin) ){
       }
@@ -256,8 +252,50 @@ void loop()
     }
 
   }
-}
+  else if (buttonState1 == HIGH){
+    lcd.clear();
+    lcd.home();
+  // Print a message to the LCD.
+    lcd.print("Yellow");
+    lcd.setCursor(8, 0);
+    lcd.print("Blue");
+    
+    int amarillo;
+    int azul;
+    int maxAmarillo = 0;
+    int maxAzul = 0;
+    buttonState1 = 0;
+    delay(500);
+    
+    while( !digitalRead(buttonPin1) ){
 
+      // Mide el maximo 
+      
+        
+      amarillo = analogRead(A0);
+      azul = analogRead(A1);
+        
+      maxAmarillo = ( maxAmarillo < amarillo ) ? amarillo : maxAmarillo ;
+      maxAzul = ( maxAzul < azul ) ? azul : maxAzul ;
+        
+        
+      lcd.setCursor(0, 1);
+      lcd.print(maxAmarillo);
+      lcd.setCursor(8, 1);
+      lcd.print(maxAzul);
+      
+    }
+  
+  delay(500);
+    lcd.clear();
+    lcd.home();
+    lcd.print("Medir");
+    lcd.setCursor(14, 0);
+    lcd.print("<>");
+    lcd.setCursor(14, 1);
+    lcd.print("ok");
+  }
+}
 
 
 String doubleToString(double num){
@@ -302,7 +340,6 @@ void errorSD(){
     delay(550);
 
   }
-
 }
 
 

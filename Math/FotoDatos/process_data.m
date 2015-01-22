@@ -11,7 +11,7 @@ time_fin = datenum(2016,3,30,0,0,0);
 UTC = 0;
 
 % FIJAR INTERVALO MINIMO ENTRE MEDICIONES (minutos)
-intervalMin = 1;
+intervalMin = datenum(0,0,0,0,2,0);
 
 %% Selección de índices de mediciones
 
@@ -21,7 +21,7 @@ index = find( raw_data.udate > time_ini & raw_data.udate < time_fin );
 % Se filtra escogiendo el "mejor" dato dentro de intervalos de intervalMin
 % minutos. Para esto escoge la medicion en la que el canal de XXXX nm
 % registra la respuesta más alta.
-
+    
 newudate = raw_data.udate(index);
 
 %% CONSTANTES Y STRINGS UTILES

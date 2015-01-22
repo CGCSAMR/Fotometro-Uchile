@@ -14,9 +14,8 @@ lambda = 414;
 % Indice de medicion Calan escogida para calibracion
 index = 5;
 
+% FIJAR INTERVALO MINIMO ENTRE MEDICIONES (minutos)
 [dummy aeroindex] = min( abs( calan_data.udate(index) - aeronet.udate ) );
-
-datestr(dummy)
 
 %% Calculo de coef de angstrom
 
