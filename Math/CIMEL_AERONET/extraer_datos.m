@@ -2,7 +2,7 @@ clear all;
 
 
 % Nombre de archivo
-filename = 'camp_control_calidad.lev10';
+filename = '22_Ene_DGF.lev10';
 
 % Cantidad de columnas
 N = 45;

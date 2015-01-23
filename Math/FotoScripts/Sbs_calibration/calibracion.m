@@ -3,16 +3,16 @@ clear all;
 % fotometros calan para realizar calibracion lado a lado
 
 % Cargar datos de CIMEL
-load camp_control_calidad.lev10.mat
+load 22_Ene_DGF.lev10.mat
 
-% Cargar datos de Calan
-load AOT_DATALOG_FALVEY.mat
+% Cargar datos de FotoCalan
+load AOT_datos_falvey_fix.mat
 
 % Longitud de onda sensor a calibrar
-lambda = 414;
+lambda = 556;
 
 % Indice de medicion Calan escogida para calibracion
-index = 5;
+index = 1;
 
 % FIJAR INTERVALO MINIMO ENTRE MEDICIONES (minutos)
 [dummy aeroindex] = min( abs( calan_data.udate(index) - aeronet.udate ) );
@@ -24,7 +24,7 @@ if ( 340 < lambda ) && ( lambda < 440 )
     angstrom = aeronet.AOT340_440Angstrom(aeroindex);
     
     aot340 = aeronet.AOT_340(aeroindex);
-    aot675 = aeronet.AOT_440(aeroindex);
+    aot440 = aeronet.AOT_440(aeroindex);
     
     % Volaje medido en sensor azul
     V_medido = calan_data.Sens_414_nm(index);
@@ -33,7 +33,7 @@ if ( 340 < lambda ) && ( lambda < 440 )
     AOT_r = calan_data.otros.tauR{2}(index);
     
     beta340 = aot340 * 0.34 ^ angstrom;
-    beta440 = aot675 * 0.44 ^ angstrom;
+    beta440 = aot440 * 0.44 ^ angstrom;
     
     beta = mean( [ beta340 beta440 ] );
     

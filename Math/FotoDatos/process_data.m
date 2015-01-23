@@ -29,13 +29,13 @@ newudate = raw_data.udate(index);
 P0=1013.25; % PRESION n.d.m.
 lamtxt={'556_nm','414_nm'};
 
-lam=[570,400]; % LONGITUD DE ONDA DE MEDICION EN nm
+lam=[556,414]; % LONGITUD DE ONDA DE MEDICION EN nm
 
 aodtxt={'AOT_556_nm','AOT_414_nm'};
 sigtxt={'Sens_556_nm','Sens_414_nm'};
 
-% CONSTANTES DE CALIBRACION
-V0 = [1000 1356.3];
+% CONSTANTES DE CALIBRACION FALVEY
+V0 = [809.03 1255];
 
 %% CALCULO DEL DIA DEL AÑO (NO DIA JULIANO, NO SE LLAMA ASI)
 
