@@ -9,10 +9,10 @@ load 22_Ene_DGF.lev10.mat
 load AOT_datos_falvey_fix.mat
 
 % Longitud de onda sensor a calibrar
-lambda = 556;
+lambda = 414;
 
 % Indice de medicion Calan escogida para calibracion
-index = 1;
+index = 5;
 
 % FIJAR INTERVALO MINIMO ENTRE MEDICIONES (minutos)
 [dummy aeroindex] = min( abs( calan_data.udate(index) - aeronet.udate ) );
