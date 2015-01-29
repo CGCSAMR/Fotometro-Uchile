@@ -2,7 +2,7 @@ clear all;
 
 
 % Nombre de archivo
-filename = 'data_27_ene_2015.lev10';
+filename = 'aeronet_28_ene.lev10';
 
 % Cantidad de columnas
 N = 45;

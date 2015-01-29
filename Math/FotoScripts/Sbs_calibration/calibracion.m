@@ -3,16 +3,19 @@ clear all;
 % fotometros calan para realizar calibracion lado a lado
 
 % Cargar datos de CIMEL
-load 22_Ene_DGF.lev10.mat
+load data_27_ene_2015.lev10.mat
 
 % Cargar datos de FotoCalan
 load AOT_datos_falvey_fix.mat
 
 % Longitud de onda sensor a calibrar
-lambda = 414;
+lambda = 556;
 
+V0 = [];
+
+for index = 1:length(calan_data.udate)
 % Indice de medicion Calan escogida para calibracion
-index = 5;
+%index = 5;
 
 % FIJAR INTERVALO MINIMO ENTRE MEDICIONES (minutos)
 [dummy aeroindex] = min( abs( calan_data.udate(index) - aeronet.udate ) );
@@ -72,7 +75,9 @@ AirM = calan_data.AirMass(index);
 
 % Constante de calibracion!
 
-V0 = V_medido * exp( ( AOT_e + AOT_r ) * AirM )/ SDC
+V0 = [V0 V_medido * exp( ( AOT_e + AOT_r ) * AirM )/ SDC ];
 
-    
+end
+
+V0
     
