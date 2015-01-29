@@ -271,6 +271,8 @@ void loop()
 
       // Mide el maximo 
       
+      for(int i = 0; i < 300; i++)
+      {
         
       amarillo = analogRead(A0);
       azul = analogRead(A1);
@@ -278,7 +280,8 @@ void loop()
       maxAmarillo = ( maxAmarillo < amarillo ) ? amarillo : maxAmarillo ;
       maxAzul = ( maxAzul < azul ) ? azul : maxAzul ;
         
-        
+      }
+       
       lcd.setCursor(0, 1);
       lcd.print(maxAmarillo);
       lcd.setCursor(8, 1);
