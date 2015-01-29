@@ -17,6 +17,7 @@ index = 5;
 % FIJAR INTERVALO MINIMO ENTRE MEDICIONES (minutos)
 [dummy aeroindex] = min( abs( calan_data.udate(index) - aeronet.udate ) );
 
+
 %% Calculo de coef de angstrom
 
 if ( 340 < lambda ) && ( lambda < 440 )

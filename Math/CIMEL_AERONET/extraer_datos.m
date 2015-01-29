@@ -2,7 +2,7 @@ clear all;
 
 
 % Nombre de archivo
-filename = '22_Ene_DGF.lev10';
+filename = 'data_27_ene_2015.lev10';
 
 % Cantidad de columnas
 N = 45;
