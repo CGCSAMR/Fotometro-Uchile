@@ -48,3 +48,20 @@ plot(calan_data.udate(index), calan_data.AOT_556_nm(index), '-y*');
 hold off
 
 datetick;
+
+% hold on
+%  
+% plot(aeronet.udate, aeronet.AOT_500, '-*' )
+%  
+% load AOT_datos_marcos_fix.mat
+% plot(calan_data.udate, calan_data.AOT_556_nm, '-g*');
+% 
+% load AOT_datos_roberto_fix.mat
+% plot(calan_data.udate, calan_data.AOT_556_nm, '-r*');
+%  
+% load AOT_datos_falvey_fix.mat
+% plot(calan_data.udate, calan_data.AOT_556_nm, '-y*');
+%  
+% hold off
+%  
+% datetick;
