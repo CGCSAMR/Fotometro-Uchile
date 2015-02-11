@@ -1,6 +1,6 @@
 clear all;
 
-load AOT_data_MARCOS_fix.mat
+load AOT_data_ROBERT_fix.mat
 
 time_ini = datenum(2015,2,1,0,0,0);
 time_fin = datenum(2015,2,8,13,0,0);
