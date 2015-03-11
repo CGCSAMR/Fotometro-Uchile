@@ -33,3 +33,4 @@ end
 clear() %limpieamos el espacio de opercacion
 format short
 argout = m;
+end
