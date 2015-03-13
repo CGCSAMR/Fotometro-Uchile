@@ -18,7 +18,7 @@ lnV2 = log(V2);
 airmass = calan_data.AirMass(index);
 
 % Correccion distancia tierra sol
-SDC = calan_data.SunDistCORR(index);
+SDC = calan_data.SunDistCORR(index); % (R/R0)^2
 
 % hora
 udate = calan_data.udate(index);

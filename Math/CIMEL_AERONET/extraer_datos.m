@@ -2,7 +2,7 @@ clear all;
 
 
 % Nombre de archivo
-filename = 'aeronet_28_ene.lev10';
+filename = '30_ene_2015_DGF.lev10';
 
 % Cantidad de columnas
 N = 45;

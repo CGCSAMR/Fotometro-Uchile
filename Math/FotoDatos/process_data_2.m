@@ -1,3 +1,5 @@
+% Pensado para los Fotometros Calan
+
 get_data
 
 %% Process raw_data to obtain AOT
@@ -35,13 +37,13 @@ aodtxt={'AOT_556_nm','AOT_414_nm'};
 sigtxt={'Sens_556_nm','Sens_414_nm'};
 
 % CONSTANTES DE CALIBRACION FALVEY
- V0 = [878.2760 1.2113e+03];
+% V0 = [ 679.9633 733.5996];
+
+% % CONSTANTES ROBERTO
+%  V0 = [ 709.2878 737.1295 ];
 
 % CONSTANTES MARCOS
-% V0 = [ 809.4415, 1.1981e+03];
-
-% CONSTANTES ROBERTO
-% V0 = [ 813.6142    1.2093e+03 ];
+V0 = [ 768.3368 769.4022 ];
 
 %% CALCULO DEL DIA DEL AÑO (NO DIA JULIANO, NO SE LLAMA ASI)
 
@@ -85,52 +87,64 @@ nu0 = (180-SZA);    %*pi/180;
 mu0 = cosd(SZA);
 AMzdun = (abs(mu0)+0.50572.*(nu0-83.92).^-1.6364  ).^-1;  % Airmass
 
-%% CALCULO SCATTERING RAYLEIGH
+% CALCULO SCATTERING RAYLEIGH
 
-lammic=lam/1000;
-% gravity calc
+% Longitudes de onda lam en nm
 
-lat = raw_data.Latitude(index);
-altitude= raw_data.Altitude_m(index);
-
-
-g0cms=980.6160*(1-0.0026373.*cosd(2*lat) +0.0000059.*(cosd(2.*lat).^2) ...
-                ); %cm/s
-g0=g0cms/100; %m/s
-
-gcms=g0cms-( 3.085462e-4 + 2.27e-7.*cosd(2*lat)).*altitude ...
-     + (7.254e-11 + 1e-13.*cosd(2*lat)).*altitude ...
-     - (1.517e-17 + 6e-20.*cosd(2*lat)).*altitude ;
-g=gcms/100;
-
-% 
-Av= 6.0221367.*1e23 ; % avogadro     
-
-sig=1e-28.*( 1.0455996 - 341.29061.*lammic.^-2 - 0.90230850.*lammic.^2 ...
-             )./(1+  0.0027059889.*lammic.^-2 ...
-                 - 85.968563.*lammic.^2); ...
-%cm^2
-CO2=360; % en ppm   
-ma=15.0556.*CO2.*1e-6+28.9595; % gm/mol
-for i=1:length(V0)
-    tauRbod{i}=(sig(i).*1e-4).*(raw_data.Pressure_Pa(index).*Av)./( ma*1e-3.*g );
-    % mejor que el de ichoku
+for i = 1:length(lam)
+   
+    if lam(i) <= 500
+        A = 6.50362e-3;
+        B = 3.55212;
+        C = 1.35579;
+        D = 0.11563;
+    end
+    
+    if lam(i) > 500
+       A = 8.64627e-3;
+       B = 3.99668;
+       C = 1.10298e-2;
+       D = 2.71393e-2;
+    end
+    
+    % se pasa presion a hPa
+    pressure = raw_data.Pressure_Pa(index) / 100;
+    
+    % se pasa lambda a micrometro
+    lam_um = lam(i) / 1000;
+    
+    tauR(:,i) = ( pressure / P0 ) * A * lam_um ^ ( -B - C*lam_um - D/lam_um ) ;
+    
 end
+
+% Usando datos empiricos
+
+% % FALVEY
+%  tauR(:,1) = tauR(:,1) * 0 + 0.1338; 
+%  tauR(:,2) = tauR(:,2) * 0 + 0.2732;
+
+% % ROBERTO
+% tauR(:,1) = tauR(:,1) * 0 + 0.1037; 
+% tauR(:,2) = tauR(:,2) * 0 + 0.2538;
+% % 
+% MARCOS
+tauR(:,1) = tauR(:,1) * 0 + 0.1515; 
+tauR(:,2) = tauR(:,2) * 0 + 0.2486;
 
 
 %% CORRECCION AOT (RECORDAR QUE HAY QUE RECALIBRAR LOS VALORES DE V0)
 
 for i=1:length(V0)
     
-    AOT{i}= ( log(V0(i)./SDCORR(index)' ) - log(raw_data.(sigtxt{i})(index)))...
-                                     ./AMzdun' ...
-                                     - tauRbod{i};
+    AOT{i}= ( log( V0(i)./SDCORR(index)' ) - log( raw_data.( sigtxt{i} )(index) ) - ...
+            tauR(:,i) .* ( pressure/P0 ) .* AMzdun' ) ./ AMzdun';
     
-    for j=1:size(AOT{i},1)
-        if ~isreal(AOT{i}(j))
-            AOT{i}(j)=NaN;
-        end
-    end
+%     for j=1:size(AOT{i},1)
+%         if ~isreal(AOT{i}(j))
+%             AOT{i}(j)=NaN;
+%         end
+%     end
+
 end
 
 %% Guardar datos procesados
@@ -156,7 +170,7 @@ end
     calan_data.V0=V0;
     
     calan_data.udate      =  newudate       ;              
-    calan_data.otros.tauR =  tauRbod;
+    calan_data.otros.tauR =  tauR;
     calan_data.otros.idcam=index;
     calan_data.otros.lamtxt=lamtxt;
     calan_data.otros.lam=lam;
@@ -167,6 +181,4 @@ end
     c = calan_data;
     
 save( ['AOT_' name '.mat' ] , 'calan_data' , '-v7' );
-
-
 
