@@ -1,0 +1,103 @@
+
+#define PIN_TERMOMETRO 0
+
+void setup() {                
+  
+  init_PuenteH();
+  encendido_PuenteH(1);
+       
+}
+
+
+void loop() {
+  
+	control_motor_PuenteH(1,50,1);
+  
+  	Serial.println(leer_Temperatura(PIN_TERMOMETRO));
+  
+	delay(2000);               // wait for a second
+
+	//control_motor_PuenteH(1,255,-1);
+  
+	//delay(1000);               // wait for a second
+
+}
+
+
+void encendido_PuenteH(int encender){
+
+	if(encender == 0)
+		digitalWrite (6, LOW);  /*Se Deshabilita el motor shield*/
+	else
+		digitalWrite (6, HIGH); /*Se Habilita la salida del motor Shield */
+}
+
+void control_motor_PuenteH(int motor, int pwm, int sentido)
+{
+	/* Permite controlar motores
+	Valores aceptados:
+		motor: {1,2}
+		pwm: [0,255] 0% a 100%
+		sentido: {-1,+1}
+	*/
+	
+	if(pwm > 255)	pwm = 255;
+		
+	else if(pwm < 0)	pwm = 0;
+		
+	if(motor == 1)
+	{
+		if(sentido > 0) // Girar derecha
+		{
+			digitalWrite (4, LOW);			
+			digitalWrite (5, HIGH);
+		}
+		
+		else if(sentido < 0) // Girar izquierda
+		{
+			digitalWrite (4, HIGH);
+			digitalWrite (5, LOW);
+		}	
+		
+		analogWrite (9, pwm); /*Se establece la velocidad Motor1 */
+		
+	}
+	
+	else if(motor == 2)
+	{
+		if(sentido > 0) // Girar derecha
+		{
+			digitalWrite (7, LOW);			
+			digitalWrite (8, HIGH);
+		}
+		
+		else if(sentido < 0) // Girar izquierda
+		{
+			digitalWrite (7, HIGH);
+			digitalWrite (8, LOW);
+		}	
+		
+		analogWrite (10, pwm); /*Se establece la velocidad Motor1 */
+		
+	}
+		
+} 
+
+void init_PuenteH(){
+  
+  	Serial.begin(9600);
+	pinMode (4, OUTPUT); /*Se configura el pin 4 (1A) como salida */ 
+	pinMode (5, OUTPUT); /*Se configura el pin 5 (1B) como salida */
+	pinMode (9, OUTPUT); /*Se configura el pin 9 (P1) como salida */
+	pinMode (7, OUTPUT); /*Se configura el pin 7 (2A) como salida */
+	pinMode (8, OUTPUT); /*Se configura el pin 8 (2B) como salida */
+	pinMode (10, OUTPUT); /*Se configura el pin 10 (P2) como salida */
+	pinMode (6, OUTPUT); /*Se configura el pin 6 (SE) como salida */
+}
+
+float leer_Temperatura(int analog_pin)
+{
+	float tempC = analogRead(analog_pin);
+	tempC = (5.0 * tempC * 100.0)/1024.0; 
+	return tempC;	
+}
