@@ -1,23 +1,55 @@
 
 #define PIN_TERMOMETRO 0
+int pwm, signo, delta_pwm;
+
+float temp_actual, temp_Objetivo, err_temp;
 
 void setup() {                
   
-  init_PuenteH();
-  encendido_PuenteH(1);
+	pwm = 0;
+	delta_pwm = 1;
+	
+	temp_Objetivo = 15.0;
+  	err_temp = 0.5;
+  	
+  	signo = 1; //Indica si peltier debe calentar o enfriar
+  
+	init_PuenteH();
+	encendido_PuenteH(1);
+   
        
 }
 
 
 void loop() {
   
-	control_motor_PuenteH(1,50,1);
+  	
+  	temp_actual = leer_Temperatura(PIN_TERMOMETRO);
+  	
+  	if ( temp_actual > (temp_Objetivo + err_temp) )
+  		pwm += -1 * delta_pwm;
+  		
+  	else if (temp_actual < (temp_Objetivo - err_temp) )
+  		pwm += delta_pwm;
   
-  	Serial.println(leer_Temperatura(PIN_TERMOMETRO));
+  	if ( pwm > 255)	pwm = 255;
+  	
+  	else if (pwm < -255) pwm = -255;
+  	
+  	if (pwm < 0)	signo = -1;
+  	
+  	else if(pwm > 0)	signo = 1;
   
-	delay(2000);               // wait for a second
+	control_motor_PuenteH( 1 , abs(pwm) , signo);
+  
+  	Serial.print("Temp = ");
+  	Serial.print(temp_actual);
+  	
+  	Serial.print("  pwm = ");
+  	Serial.println(pwm);
+  	  
+	delay(4000); 
 
-	//control_motor_PuenteH(1,255,-1);
   
 	//delay(1000);               // wait for a second
 
