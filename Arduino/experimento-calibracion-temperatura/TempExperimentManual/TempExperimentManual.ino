@@ -2,7 +2,7 @@
 #define PIN_TERMOMETRO 0
 int pwm, signo;
 
-float temp_actual;
+float err_temp, temp_actual;
 
 void setup() {                
   
@@ -44,7 +44,7 @@ void loop() {
   
 	print_Status();
   	  
-	delay(4000); 
+	delay(1000); 
 
 
   
@@ -59,7 +59,7 @@ void print_Status()
   	Serial.print(temp_actual);
   	
   	Serial.print("  pwm = ");
-  	Serial.print(pwm);
+  	Serial.println(pwm);
   	
 }
 
