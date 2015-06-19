@@ -53,7 +53,7 @@ const int chipSelect = 8;//Constanst to use
 const int buttonPin = A2;
 const int buttonPin0 = 7;
 const int buttonPin1 = A3;
-#define TIEMPO_MEDICION 20000//Time of a medition in millis
+#define TIEMPO_MEDICION 15000//Time of a medition in millis
 //#define LARGO_MEDIDA 1//Number of measurements to take 
 #define SEA_LEVEL_PRESSURE 101500//Sea level prssure
 #define PIN_BUZZER 5//conetion to the pin buzzer
