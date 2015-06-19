@@ -1,6 +1,4 @@
 
-// VERSION ESTABLE 19 JUNIO 2015
-
 // SE ELIMINA CALCULO DE VARIANZA
 // SE MIDE SOLO EL MAXIMO
 
@@ -40,10 +38,13 @@
  */
 #include <LiquidCrystal.h>//The Arduino LiquidCrystal library
 #include <SD.h>//SD library
-#include <Time.h>//Time library  
+//#include <Time.h>//Time library  
 #include <Wire.h>//I2C library  
-#include <DS1307RTC.h>  // a basic DS1307 library that returns time as a time_t
+//#include <DS1307RTC.h>  // a basic DS1307 library that returns time as a time_t
 #include <Adafruit_BMP085.h>
+#include "RTClib.h"
+
+
 // initialize the LiquidCrystal library with the numbers of the interface pins
 LiquidCrystal lcd(9, 10, 6, 4, 3, 2);
 //Exposition time in millis
@@ -68,6 +69,7 @@ int inicio;// call int inicio
 String data="";//call String data
 File dataFile;
 Adafruit_BMP085 bmp;//call to BMP 085 sensor
+RTC_DS1307 RTC;
 
 void setup()
 {
@@ -77,12 +79,17 @@ void setup()
   lcd.print("   Fotometro");//initial prin in LCD
   lcd.setCursor(0, 1);//resposion of a cursor
   lcd.print("  FCFM Uchile");
-  setSyncProvider(RTC.get);   // the function to get the time from the RTC
-  if(timeStatus()!= timeSet) {//If the time can't work,it'll show the error in the LCD display
-    lcd.clear();
-    lcd.home();
-    lcd.print("RTC Error");
-  }
+  //setSyncProvider(RTC.get);   // the function to get the time from the RTC
+  //if(timeStatus()!= timeSet) {//If the time can't work,it'll show the error in the LCD display
+  //  lcd.clear();
+  //  lcd.home();
+  //  lcd.print("RTC Error");
+  //}
+  
+  RTC.begin();
+  RTC.adjust(DateTime(__DATE__, __TIME__));
+  
+  
   pinMode(chipSelect, OUTPUT);//comunication with Olimex-MCI datalogger
   pinMode(buttonPin, INPUT);
   pinMode(buttonPin0, INPUT);//comunication with the A3 button   
@@ -116,12 +123,14 @@ void setup()
   lcd.print("<>");
   lcd.setCursor(14, 1);
   lcd.print("ok");
+  
 }
 
-
+  
 
 void loop()
 {
+  
   buttonState = digitalRead(buttonPin);//read the button input
   buttonState0 = digitalRead(buttonPin0);
   if (buttonState == HIGH){ 
@@ -136,9 +145,10 @@ void loop()
     File dataFile = SD.open("DATALOG.CSV", FILE_WRITE);
     if (dataFile) {
       //write the date
+      DateTime now = RTC.now();
 
-        data += String(year()) + "," + String(month()) + "," + String(day()) + ",";
-      data += String(hour()) + "," + String(minute()) + "," + String(second()) + ","; 
+      data += String(now.year()) + "," + String(now.month()) + "," + String(now.day()) + ",";
+      data += String(now.hour()) + "," + String(now.minute()) + "," + String(now.second()) + ","; 
 
       dataFile.print(data);
 
@@ -243,9 +253,7 @@ void loop()
     lcd.home();
     lcd.println("Conenctado");
     Serial.begin(9600);
-    while (!Serial.available()) {
-      // wait for serial port to connect. Needed for Leonardo only
-    }
+
     // open the file. note that only one file can be open at a time,
     // so you have to close this one before opening another.
     dataFile = SD.open("DATALOG.CSV", FILE_READ);
