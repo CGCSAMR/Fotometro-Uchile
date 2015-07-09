@@ -1,11 +1,12 @@
 clear all;
 
-load AOT_data_MARCOS_fix.mat
+load AOT_roberto_cor.mat
 
-time_ini = datenum(2015,2,1,0,0,0);
-time_fin = datenum(2015,2,8,13,0,0);
+time_ini = datenum(2014,2,1,0,0,0);
+time_fin = datenum(2016,2,8,13,0,0);
 
-index = find( calan_data.AirMass > 1.4 & calan_data.AirMass < 1000 );
+% Filtrar por masa de aire
+index = find( calan_data.AirMass > 1 & calan_data.AirMass < 8000 );
 
 % V1 sensor amarillo, V2 sensor azul
 V1 = calan_data.Sens_556_nm(index);

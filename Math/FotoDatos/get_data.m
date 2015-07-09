@@ -10,8 +10,8 @@ name = input('Enter file name (without extension): ','s');
 %lat = input('Enter latitude D.DDDD°: ')
 %long = input('Enter longitude D.DDDD°: ')
 
-latitud = -33.2738;
-longitud = -70.3942;
+latitud = -16.35384;
+longitud = -68.13182;
 
 % Numero columnas
 N = 11;
