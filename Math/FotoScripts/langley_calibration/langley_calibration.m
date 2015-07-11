@@ -1,6 +1,6 @@
 clear all;
 
-load AOT_roberto_cor.mat
+load AOT_falvey_cor.mat
 
 time_ini = datenum(2014,2,1,0,0,0);
 time_fin = datenum(2016,2,8,13,0,0);
